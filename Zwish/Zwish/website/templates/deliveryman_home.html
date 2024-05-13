@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Delivery Man Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Delivery Man Dashboard</h1>
+    <div class="delivery-info">
+        <h2>Number of Deliveries:</h2>
+        <p id="delivery-count">{{ delivery_count }}</p>
+    </div>
+    <br />
+    <h2 id="texth2">Change your Availability Status</h2>
+    <div class="button-container">
+        <button class="button available" onclick="changeAvailability('Available')">Available</button>
+        <button class="button not-available" onclick="changeAvailability('Not Available')">Not Available</button>
+    </div>
+</div>
+
+<script>
+    function changeAvailability(status) {
+        fetch('/delivery-man-dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: status })
+        })
+
+    }
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding-bottom: 100px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #texth2 {
+        text-align: center;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .delivery-info {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .button.available {
+        background-color: green;
+        color: white;
+    }
+
+    .button.not-available {
+        background-color: red;
+        color: white;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Customer Information{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Customer Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number of Orders</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>C1</td>
+                <td>John Doe</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>C2</td>
+                <td>Jane Smith</td>
+                <td>8</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px 0;
+        margin: 0;
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    /* body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #e6f7ff; 
+    }
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #b3e0ff; 
+        color: #333;
+        font-weight: bold;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f0f0f0;
+    } */
+</style>
+{% endblock %}

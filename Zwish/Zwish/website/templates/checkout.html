@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Admin Home{% endblock %}
+
+{% block content %}
+<div class="container1">
+    <h2>Your Name:</h2>
+    <p id="customer-name">{{ customer_data[0] }}</p>
+    <h2>Phone Number:</h2>
+    <p id="customer-phone">{{ customer_data[1] }}</p>
+    <h2>Address:</h2>
+    <p id="customer-address">{{ customer_data[2] }}</p>
+</div>
+{% if vendor != None %}
+<br />
+<div class="container2">
+    <h2>Name of Vendor:</h2>
+    <p id="vendor-name">{{ vendor[1] }}</p>
+    <h2>Location of Vendor:</h2>
+    <p id="vendor-location">{{ vendor[2] }}</p>
+</div>
+{% if deliveryguy != None %}
+<br />
+<div class="container3">
+    <h2>Name of Delivery Partner:</h2>
+    <p id="deliveryguy-name">{{ deliveryguy[1] }}</p>
+    <h2>Phone Number:</h2>
+    <p id="deliveryguy-phone">{{ deliveryguy[2] }}</p>
+</div>
+
+<div class="total">
+    Total: Rs.{{ customer_data[3] }}
+</div>
+
+<br />
+<button>Finish</button>
+{% else %}
+<br />
+<div class="deliveryguy-info">
+    <h2>No Delivery Partners Available Right Now</h2>
+    <form action="/cancel-order" method="POST">
+        <button type="submit" name="reason" value="3">Refresh</button>
+        <button type="submit" name="reason" value="2">Cancel Order</button>
+    </form>
+    
+</div>
+{% endif %}
+
+{% else %}
+<br />
+<div class="vendor-info">
+    <h2>Items are Out Of Stock</h2>
+    <form action="/cancel-order" method="POST">
+        <button type="submit" name="reason" value="3">Refresh</button>
+        <button type="submit" name="reason" value="1">Cancel Order</button>
+    </form>
+    
+</div>
+
+<script>
+    // function cancelOrder(reason) {
+    //     fetch('/cancel-order', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ reason: reason })
+    //     })
+    // }
+    document.getElementById('cancel-order-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Create an object with the reason value
+        const formData = {
+            reason: event.submitter.value
+        };
+
+        // Send a POST request with JSON data
+        fetch('/cancel-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Handle successful response
+                console.log('Request successful');
+            } else {
+                // Handle error response
+                console.error('Request failed:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Request error:', error);
+        });
+    });
+
+</script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding-bottom: 100px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .container1, .container2, .container3, .total {
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ddd;
+    }
+
+    .deliveryguy-info, .vendor-info {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: inline;
+    }
+
+
+    .total {
+        text-align: center;
+        font-weight: bold;
+        padding: 15px;
+    }
+</style>
+{% endif %}
+{% endblock %}

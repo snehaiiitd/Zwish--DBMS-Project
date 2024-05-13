@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 align="center">ITEMS</h1>
+
+<div class="container">
+    <div class="product">
+        <img src="https://images-cdn.ubuy.co.in/654e261cb2c89d54ea57bc83-colgate-extra-clean-toothbrush-medium.jpg"
+            alt="Toothbrush" width="100">
+        <p>Colgate Extra Clean Toothbrush</p>
+        <button onclick="addToCart('Colgate Extra Clean Toothbrush')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://www.jiomart.com/images/product/original/491551829/bingo-achaari-masti-mad-angles-130-g-product-images-o491551829-p491551829-0-202308182201.jpg?im=Resize=(1000,1000)"
+            alt="Chips" width="100">
+        <p>Bingo Achaari Masti Mad Angles</p>
+        <button onclick="addToCart('Bingo Achaari Masti Mad Angles')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://www.quickpantry.in/cdn/shop/products/maggi-masala-instant-noodles-35-g-quick-pantry_500x500.jpg?v=1710539050"
+            alt="Noodles" width="100">
+        <p>Maggi Masala Instant Noodles</p>
+        <button onclick="addToCart('Maggi Masala Instant Noodles')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://s3.ap-south-1.amazonaws.com/diingdong/amul00001.jpg" alt="Milk" width="100">
+        <p>Amul Milk</p>
+        <button onclick="addToCart('Amul Milk')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://www.tresemme.in/cdn/shop/files/TRESemme-Keratin-Smooth-Shampoo-_580ml_-Conditioner-_190-ml_-Serum-_100ml_640x_9f981749-17a4-4a09-9581-0d9f9defae1c.jpg?v=1694754897"
+            alt="Shampoo" width="100">
+        <p>TRESemme Keratin Smooth Shampoo</p>
+        <button onclick="addToCart('TRESemme Keratin Smooth Shampoo')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://m.media-amazon.com/images/I/5105OqI+A4S._AC_UF1000,1000_QL80_.jpg" alt="Soap" width="100">
+        <p>Ferrero Rocher</p>
+        <button onclick="addToCart('Ferrero Rocher')">Add to Cart</button>
+    </div>
+    <div class="product">
+        <img src="https://images-cdn.ubuy.co.in/654b66d685cdf24659795230-nescafe-clasico-instant-coffee-dark.jpg"
+            alt="Shampoo" width="100">
+        <p>Nescafe coffee</p>
+        <button onclick="addToCart('Nescafe coffee')">Add to Cart</button>
+    </div>
+</div>
+<div class="bottom-navbar navbar">
+    <p>Items Selected: {{ item_count }}</p>
+    <button onclick="goToCart()">Go to Cart</button>
+</div>
+
+<script>
+    // JavaScript to count selected items and navigate to cart
+    let selectedItems = 0;
+
+    function addToCart(itemName) {
+        // selectedItems++;
+        // document.getElementById("itemCount").textContent = selectedItems;
+        // document.getElementById("itemCountNav").textContent = selectedItems;
+
+        fetch('/add-to-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itemName: itemName })
+        })
+
+    }
+
+    function goToCart() {
+        window.location.href = '/cart';
+    }
+</script>
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .product {
+        margin: 10px;
+        text-align: center;
+    }
+
+    .product img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .product button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .bottom-navbar {
+        background-color: black;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .bottom-navbar p {
+        margin: 0;
+    }
+
+    body {
+        padding-bottom: 100px;
+    }
+</style>
+{% endblock %}
